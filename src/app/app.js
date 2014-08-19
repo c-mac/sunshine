@@ -60,7 +60,38 @@ angular.module('app', [])
     // scope: {
 
     // },
-    templateUrl: 'sun-question-prompt.html'
+    //templateUrl: 'sun-question-prompt.html'
+    template: '<div class="row">' +
+                '<div class="col-sm-3"></div>' +
+                '<div class="col-sm-6">' +
+                  '<label>Question:</label>' +
+                  '<textarea class="form-control" rows="3"></textarea>' +
+                '</div>' +
+                '<div class="col-sm-3"></div>' +
+              '</div>' +
+              '<div class="row">' +
+                '<div class="col-sm-5"></div>' +
+                '<div class="col-sm-1">' +
+                  '<button class="btn btn-primary">Submit</button>' +
+                '</div>' +
+                '<div class="col-sm-1">' +
+                  '<button class="btn btn-primary">Skip</button>' +
+                '</div>' +
+                '<div class="col-sm-5"></div>' +
+              '</div>'
   };
+})
+
+.directive('sunGreeting', function() {
+  return {
+    restrict: 'E',
+    template: '<div class="row">' +
+                '<div class="col-sm-3"></div>' +
+                '<div class="col-sm-6">' +
+                  '<h1>Sunshine!</h1>' +
+                '</div>' +
+                '<div class="col-sm-3"></div>' +
+              '</div>'
+  }
 })
 ;
