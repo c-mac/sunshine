@@ -53,4 +53,14 @@ angular.module('app', [])
     return this.message.length;
   };
 })
+
+.directive('sunQuestionPrompt', function() {
+  return {
+    restrict: 'E',
+    // scope: {
+
+    // },
+    templateUrl: 'sun-question-prompt.html'
+  };
+})
 ;
