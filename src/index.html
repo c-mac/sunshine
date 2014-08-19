@@ -16,7 +16,7 @@
     <body ng-controller="AppCtrl">
         <div class="container">
             <h1>{{greeting}}</h1>
-            <select ng-model='myPerson' ng-options='person.name for person in people'></select>
+<!--             <select ng-model='myPerson' ng-options='person.name for person in people'></select>
             <label  ng-model='myPerson'>Age: {{myPerson.age}}</label>
             <label  ng-model='myPerson'>Money: {{myPerson.money | currency}}</label>
 
@@ -24,12 +24,14 @@
             <div ng-controller="InputButtonCtrl as inputButtonCtrl">
                 <input ng-model="inputButtonCtrl.message"/>
                 <button class='btn btn-primary' ng-disabled="!inputButtonCtrl.messageEntered()" ng-click="">Button</button>
-            </div>
+            </div> -->
 
-            <h1>DATA</h1>
+            <sun-question-prompt></sun-question-prompt>
+
+<!--             <h1>DATA</h1>
             <ul ng-repeat='question in questions'>
                <li>{{question}}</li>
-            </ul>
+            </ul> -->
         </div>
     </body>
 </html>
