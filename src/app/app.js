@@ -5,7 +5,6 @@
 angular.module('sunshine', [])
 
 .controller('AppCtrl', function($scope, AppService) {
-  $scope.question = '';
    //snagged from http://stackoverflow.com/questions/12505760/angularjs-processing-http-response-in-service
    AppService.getRandomQuestion().then(function(d) {
      $scope.question = d;
@@ -22,7 +21,6 @@ angular.module('sunshine', [])
       // $http returns a promise, which has a then function, which also returns a promise
       var promise = $http.get('../assets/data.json').then(function (response) {
         // The then function here is an opportunity to modify the response
-        console.log(response);
         // The return value gets picked up by the then in the controller.
         return response.data.questions[Math.floor(Math.random() * response.data.questions.length)];
       });
@@ -45,9 +43,8 @@ angular.module('sunshine', [])
   return {
     restrict: 'E',
     scope: {
-      question: '=',
+      question: '='
     },
-    //templateUrl: 'sun-question-prompt.html'
     template: '<div class="row">' +
                 '<div class="col-sm-3"></div>' +
                 '<div class="col-sm-6">' +
