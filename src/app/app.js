@@ -48,20 +48,15 @@ angular.module('sunshine', [])
     template: '<div class="row">' +
                 '<div class="col-sm-3"></div>' +
                 '<div class="col-sm-6">' +
-                  '<label>{{question}}</label>' +
-                  '<textarea class="form-control" rows="3"></textarea>' +
+                  '<div class="form-group">' +
+                    '<label>{{question}}</label>' +
+                    '<textarea class="form-control" rows="3"></textarea>' +
+                  '</div>' +
+                  '<button type="button" class="btn btn-primary">Submit</button>' +
+                  ' ' +
+                  '<button type="button" class="btn btn-info pull-right">Skip</button>' +
                 '</div>' +
                 '<div class="col-sm-3"></div>' +
-              '</div>' +
-              '<div class="row">' +
-                '<div class="col-sm-5"></div>' +
-                '<div class="col-sm-1">' +
-                  '<button class="btn btn-primary">Submit</button>' +
-                '</div>' +
-                '<div class="col-sm-1">' +
-                  '<button class="btn btn-primary">Skip</button>' +
-                '</div>' +
-                '<div class="col-sm-5"></div>' +
               '</div>'
   };
 })
