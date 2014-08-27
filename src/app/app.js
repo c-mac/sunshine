@@ -5,17 +5,24 @@
 angular.module('sunshine', [])
 
 .controller('AppCtrl', function($scope, AppService) {
-   //snagged from http://stackoverflow.com/questions/12505760/angularjs-processing-http-response-in-service
-   AppService.getRandomQuestion().then(function(d) {
-     $scope.question = d;
-   });
+  //snagged from http://stackoverflow.com/questions/12505760/angularjs-processing-http-response-in-service
+  //TODO: refactor using angular 'resolve'
+  AppService.getRandomQuestion().then(function(d) {
+    $scope.question = d;
+  });
+
+  $scope.skipQuestion = function() {
+    AppService.getRandomQuestion().then(function(d) {
+      $scope.question = d;
+    });
+  };
  })
 
 
 .service('AppService', function($http) {
 
-   //TODO: make
-   //snagged from http://stackoverflow.com/questions/12505760/angularjs-processing-http-response-in-service
+  //TODO: make
+  //snagged from http://stackoverflow.com/questions/12505760/angularjs-processing-http-response-in-service
   var AppService = {
     getRandomQuestion: function() {
       // $http returns a promise, which has a then function, which also returns a promise
@@ -43,7 +50,8 @@ angular.module('sunshine', [])
   return {
     restrict: 'E',
     scope: {
-      question: '='
+      question: '=',
+      skipQuestion: '&'
     },
     template: '<div class="row">' +
                 '<div class="col-sm-3"></div>' +
@@ -54,7 +62,7 @@ angular.module('sunshine', [])
                   '</div>' +
                   '<button type="button" class="btn btn-primary">Submit</button>' +
                   ' ' +
-                  '<button type="button" class="btn btn-info pull-right">Skip</button>' +
+                  '<button type="button" class="btn btn-info pull-right" ng-click="skipQuestion()">Skip</button>' +
                 '</div>' +
                 '<div class="col-sm-3"></div>' +
               '</div>'
