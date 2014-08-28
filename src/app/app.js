@@ -21,12 +21,11 @@ angular.module('sunshine', [])
 
 .service('AppService', function($http) {
 
-  //TODO: make
   //snagged from http://stackoverflow.com/questions/12505760/angularjs-processing-http-response-in-service
   var AppService = {
     getRandomQuestion: function() {
       // $http returns a promise, which has a then function, which also returns a promise
-      var promise = $http.get('../assets/data.json').then(function (response) {
+      var promise = $http.get('src/assets/data.json').then(function (response) {
         // The then function here is an opportunity to modify the response
         // The return value gets picked up by the then in the controller.
         return response.data.questions[Math.floor(Math.random() * response.data.questions.length)];
