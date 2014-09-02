@@ -2,27 +2,40 @@
  * Created by Cameron on 8/16/14.
  */
 
+
 angular.module('sunshine', [])
 
-.controller('AppCtrl', function($scope, AppService) {
+.controller('AppCtrl', function($scope, QuestionService, AnswerService) {
   //snagged from http://stackoverflow.com/questions/12505760/angularjs-processing-http-response-in-service
   //TODO: refactor using angular 'resolve'
-  AppService.getRandomQuestion().then(function(d) {
+  QuestionService.getRandomQuestion().then(function(d) {
     $scope.question = d;
   });
 
+  AnswerService.getRandomAnswer().then(function(d) {
+    $scope.answer = d;
+  });
+
   $scope.skipQuestion = function() {
-    AppService.getRandomQuestion().then(function(d) {
+    QuestionService.getRandomQuestion().then(function(d) {
       $scope.question = d;
     });
   };
+
+  $scope.skipAnswer = function() {
+    AnswerService.getRandomAnswer().then(function(d) {
+      $scope.answer = d;
+    });
+  }
+
+
  })
 
 
-.service('AppService', function($http) {
+.service('QuestionService', function($http) {
 
   //snagged from http://stackoverflow.com/questions/12505760/angularjs-processing-http-response-in-service
-  var AppService = {
+  var QuestionService = {
     getRandomQuestion: function() {
       // $http returns a promise, which has a then function, which also returns a promise
       var promise = $http.get('src/assets/data.json').then(function (response) {
@@ -34,8 +47,31 @@ angular.module('sunshine', [])
       return promise;
     }
   };
-  return AppService;
+  return QuestionService;
  })
+
+
+.service('AnswerService', function($http) {
+
+
+    var AnswerService = {
+        getAnswers: function() {
+            var promise = $http.get('/api/answers').then(function(response) {
+                return response.data;
+            });
+            return promise;
+        },
+
+        getRandomAnswer: function() {
+            var promise = $http.get('/api/answers').then(function(response) {
+                return response.data[Math.floor(Math.random() * response.data.length)];
+            });
+            return promise;
+        }
+    }
+
+    return AnswerService;
+})
 
 .controller('InputButtonCtrl', function() {
   this.message = '';
@@ -80,4 +116,26 @@ angular.module('sunshine', [])
               '</div>'
   }
 })
+
+.directive('sunAnswerDisplay', function() {
+        return {
+            restrict: 'E',
+            scope: {
+                answer: '=',
+                skipAnswer: '&'
+            },
+            template: '<div class="row">' +
+                        '<div class="col-sm-3"></div>' +
+                        '<div class="col-sm-6">' +
+                         '<h2>Previously, you wrote:</h2>' +
+                         '<div class="form-group">' +
+                            '<label>{{answer.question}}</label><br>' +
+                            '<label>{{answer.response}}</label>' +
+                         '</div>' +
+                        '<button type="button" class="btn btn-info pull-right" ng-click="skipAnswer()">See another answer</button>' +
+                        '</div>' +
+                        '<div class="col-sm-3"></div>' +
+                        '</div>'
+        }
+    })
 ;

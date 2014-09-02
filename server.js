@@ -2,21 +2,6 @@
  * Created by Cameron on 8/16/14.
  */
 
-//var express = require('express');
-//var app = express();
-//var mongoose = require('mongoose');
-//
-//var config = require('./../mongo.json');
-//var connectionString = 'mongodb://' + config.user + ':' + config.password + '@ds049558.mongolab.com:49558/cmac-sample';
-//var questionSchema = mongoose.Schema({
-//    name: String
-//});
-//var Question = mongoose.model('Question', questionSchema);
-//var something = new Question({name: "How are you?"});
-//mongoose.connect(connectionString);
-
-
-
 /** WORKING SERVER CODE **/
 //var path = require("path"),
 //    indexPath = path.join(__dirname, '../');
@@ -64,8 +49,8 @@ var express = require('express'),
     port = process.env.PORT || 1337,
     router = express.Router(),
     mongoose = require('mongoose'),
-    config = require('./../mongo.json'),
-    Answer = require('./models/answer');
+    config = require('./mongo.json'),
+    Answer = require('./server/models/answer');
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -113,6 +98,7 @@ router.route('/answer')
     });
 
 app.use('/api', router);
+app.use(express.static(__dirname));
 
 app.listen(port);
 console.log('Magic happens on port ' + port);
