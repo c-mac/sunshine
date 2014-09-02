@@ -10,7 +10,7 @@
         <script data-require="jquery@*" data-semver="2.1.1" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script data-require="bootstrap@3.1.1" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         <script data-require="ui-router@0.2.10" data-semver="0.2.10" src="https://rawgit.com/angular-ui/ui-router/0.2.10/release/angular-ui-router.js"></script>
-        <script src="app/app.js"></script>
+        <script src="src/app/app.js"></script>
     </head>
 
     <body ng-controller="AppCtrl">
@@ -18,7 +18,7 @@
 
             <sun-greeting></sun-greeting>
 
-            <sun-question-prompt question='question'></sun-question-prompt>
+            <sun-question-prompt question='question' skip-question='skipQuestion()'></sun-question-prompt>
 
         </div>
     </body>

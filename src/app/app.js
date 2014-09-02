@@ -5,21 +5,27 @@
 angular.module('sunshine', [])
 
 .controller('AppCtrl', function($scope, AppService) {
-   //snagged from http://stackoverflow.com/questions/12505760/angularjs-processing-http-response-in-service
-   AppService.getRandomQuestion().then(function(d) {
-     $scope.question = d;
-   });
+  //snagged from http://stackoverflow.com/questions/12505760/angularjs-processing-http-response-in-service
+  //TODO: refactor using angular 'resolve'
+  AppService.getRandomQuestion().then(function(d) {
+    $scope.question = d;
+  });
+
+  $scope.skipQuestion = function() {
+    AppService.getRandomQuestion().then(function(d) {
+      $scope.question = d;
+    });
+  };
  })
 
 
 .service('AppService', function($http) {
 
-   //TODO: make
-   //snagged from http://stackoverflow.com/questions/12505760/angularjs-processing-http-response-in-service
+  //snagged from http://stackoverflow.com/questions/12505760/angularjs-processing-http-response-in-service
   var AppService = {
     getRandomQuestion: function() {
       // $http returns a promise, which has a then function, which also returns a promise
-      var promise = $http.get('../assets/data.json').then(function (response) {
+      var promise = $http.get('src/assets/data.json').then(function (response) {
         // The then function here is an opportunity to modify the response
         // The return value gets picked up by the then in the controller.
         return response.data.questions[Math.floor(Math.random() * response.data.questions.length)];
@@ -43,7 +49,8 @@ angular.module('sunshine', [])
   return {
     restrict: 'E',
     scope: {
-      question: '='
+      question: '=',
+      skipQuestion: '&'
     },
     template: '<div class="row">' +
                 '<div class="col-sm-3"></div>' +
@@ -54,7 +61,7 @@ angular.module('sunshine', [])
                   '</div>' +
                   '<button type="button" class="btn btn-primary">Submit</button>' +
                   ' ' +
-                  '<button type="button" class="btn btn-info pull-right">Skip</button>' +
+                  '<button type="button" class="btn btn-info pull-right" ng-click="skipQuestion()">Skip</button>' +
                 '</div>' +
                 '<div class="col-sm-3"></div>' +
               '</div>'
